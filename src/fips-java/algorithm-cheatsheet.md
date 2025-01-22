@@ -1,0 +1,9 @@
+# Algorithm Cheatsheet
+
+|Algorithm Name|Category|JCA Standard Name|Reason for FIPS Non-compliance|
+|---|---|---|---|
+|**Blowfish**|Cipher|Blowfish|Not a FIPS approved algorithm.|
+|**DES**|Cipher|DES|**Not approved** for general use by FIPS. It is not mentioned as legacy, or acceptable for specific uses like unwrapping.|
+|**MD2**|Message Digest|MD2|**Not a FIPS approved** hash algorithm. Considered insecure.|
+|**MD5**|Message Digest|MD5|**Not a FIPS approved** hash algorithm. Considered insecure.|
+|**RSA (without PSS parameters)**|Signature|RSA|**Not compliant** for signature generation with PKCS#1 v1.5, which is deprecated. FIPS requires RSA signatures to comply with RSASSA-PSS or RSASSA-PKCS1-v1.5 (for legacy verification).|

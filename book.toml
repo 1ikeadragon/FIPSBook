@@ -1,0 +1,6 @@
+[book]
+authors = ["Debarshi"]
+language = "en"
+multilingual = false
+src = "src"
+title = "Whitepaper on FIPS Compliance Assessment"

@@ -1,0 +1,70 @@
+// Populate the sidebar
+//
+// This is a script, and not included directly in the page, to control the total size of the book.
+// The TOC contains an entry for each page, so if each page includes a copy of the TOC,
+// the total size of the page becomes O(n**2).
+class MDBookSidebarScrollbox extends HTMLElement {
+    constructor() {
+        super();
+    }
+    connectedCallback() {
+        this.innerHTML = '<ol class="chapter"><li class="chapter-item expanded "><a href="introduction.html"><strong aria-hidden="true">1.</strong> Introduction and Motivation</a></li><li class="chapter-item expanded "><a href="fips-overview/index.html"><strong aria-hidden="true">2.</strong> A Word on FIPS</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="fips-overview/fips-140-2.html"><strong aria-hidden="true">2.1.</strong> FIPS 140-2 Explained</a></li><li class="chapter-item expanded "><a href="fips-overview/fips-140-3.html"><strong aria-hidden="true">2.2.</strong> FIPS 140-3: What’s New</a></li><li class="chapter-item expanded "><a href="fips-overview/compliance-vs-validation.html"><strong aria-hidden="true">2.3.</strong> Compliance vs. Validation</a></li><li class="chapter-item expanded "><a href="fips-overview/algorithm-cheatsheet.html"><strong aria-hidden="true">2.4.</strong> Algorithm Cheatsheet</a></li></ol></li><li class="chapter-item expanded "><a href="fips-java/index.html"><strong aria-hidden="true">3.</strong> FIPS Compliance in Java</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="fips-java/intro-to-jca.html"><strong aria-hidden="true">3.1.</strong> Introduction to Java Cryptography</a></li><li class="chapter-item expanded "><a href="fips-java/crypto-providers.html"><strong aria-hidden="true">3.2.</strong> FIPS-Validated Crypto Providers for Java</a></li><li class="chapter-item expanded "><a href="fips-java/fips-jvm-config.html"><strong aria-hidden="true">3.3.</strong> Configuring JVM for FIPS Mode</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="fips-java/compile-time.html"><strong aria-hidden="true">3.3.1.</strong> Enabling FIPS at Compile Time</a></li><li class="chapter-item expanded "><a href="fips-java/runtime-configuration.html"><strong aria-hidden="true">3.3.2.</strong> Runtime Configuration for FIPS</a></li></ol></li><li class="chapter-item expanded "><a href="fips-java/keystore-truststore.html"><strong aria-hidden="true">3.4.</strong> Keystore and Truststore Management</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="fips-java/creating-keystores.html"><strong aria-hidden="true">3.4.1.</strong> Creating FIPS-Compliant Keystores</a></li><li class="chapter-item expanded "><a href="fips-java/managing-certificates.html"><strong aria-hidden="true">3.4.2.</strong> Managing Certificates for FIPS Compliance</a></li></ol></li><li class="chapter-item expanded "><a href="fips-java/frameworks-and-libraries.html"><strong aria-hidden="true">3.5.</strong> Java Frameworks and Libraries for FIPS</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="fips-java/spring-boot.html"><strong aria-hidden="true">3.5.1.</strong> Spring Boot and FIPS Compliance</a></li><li class="chapter-item expanded "><a href="fips-java/hibernate.html"><strong aria-hidden="true">3.5.2.</strong> Hibernate with FIPS-Validated Encryption</a></li></ol></li><li class="chapter-item expanded "><a href="fips-java/debugging.html"><strong aria-hidden="true">3.6.</strong> Debugging FIPS Issues in Java</a></li><li class="chapter-item expanded "><a href="fips-java/algorithm-cheatsheet.html"><strong aria-hidden="true">3.7.</strong> Algorithm Cheatsheet</a></li></ol></li><li class="chapter-item expanded "><a href="fips-scala/index.html"><strong aria-hidden="true">4.</strong> FIPS Compliance in Scala</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="fips-scala/intro-to-crypto.html"><strong aria-hidden="true">4.1.</strong> Cryptography in Scala</a></li><li class="chapter-item expanded "><a href="fips-scala/crypto-libraries.html"><strong aria-hidden="true">4.2.</strong> FIPS-Compliant Libraries in Scala</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="fips-scala/bouncy-castle.html"><strong aria-hidden="true">4.2.1.</strong> Integrating Bouncy Castle in Scala</a></li><li class="chapter-item expanded "><a href="fips-scala/openssl.html"><strong aria-hidden="true">4.2.2.</strong> Using OpenSSL with Scala</a></li></ol></li><li class="chapter-item expanded "><a href="fips-scala/akka.html"><strong aria-hidden="true">4.3.</strong> Securing Akka Applications</a></li><li class="chapter-item expanded "><a href="fips-scala/play-framework.html"><strong aria-hidden="true">4.4.</strong> FIPS-Compliant Configurations for Play Framework</a></li><li class="chapter-item expanded "><a href="fips-scala/best-practices.html"><strong aria-hidden="true">4.5.</strong> Best Practices for Scala FIPS Development</a></li></ol></li><li class="chapter-item expanded "><a href="fips-ec2/index.html"><strong aria-hidden="true">5.</strong> FIPS Compliance in AWS EC2</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="fips-ec2/aws-overview.html"><strong aria-hidden="true">5.1.</strong> Overview of AWS FIPS Offerings</a></li><li class="chapter-item expanded "><a href="fips-ec2/launching-ec2.html"><strong aria-hidden="true">5.2.</strong> Launching FIPS-Compliant EC2 Instances</a></li><li class="chapter-item expanded "><a href="fips-ec2/index.html"><strong aria-hidden="true">5.3.</strong> FIPS-Validated Encryption for Data at Rest</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="fips-ec2/configuring-ebs.html"><strong aria-hidden="true">5.3.1.</strong> Configuring EBS Volumes</a></li><li class="chapter-item expanded "><a href="fips-ec2/managing-s3.html"><strong aria-hidden="true">5.3.2.</strong> Managing S3 Buckets for FIPS</a></li></ol></li><li class="chapter-item expanded "><a href="fips-ec2/index.html"><strong aria-hidden="true">5.4.</strong> FIPS-Compliant Networking in AWS</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="fips-ec2/vpc-encryption.html"><strong aria-hidden="true">5.4.1.</strong> Setting Up VPC Encryption</a></li><li class="chapter-item expanded "><a href="fips-ec2/elastic-load-balancers.html"><strong aria-hidden="true">5.4.2.</strong> Configuring Elastic Load Balancers for FIPS</a></li></ol></li><li class="chapter-item expanded "><a href="fips-ec2/monitoring-auditing.html"><strong aria-hidden="true">5.5.</strong> Monitoring and Auditing EC2 for FIPS Compliance</a></li></ol></li><li class="chapter-item expanded "><a href="network-encryption/index.html"><strong aria-hidden="true">6.</strong> Network Encryption for FIPS Compliance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="network-encryption/tls-fundamentals.html"><strong aria-hidden="true">6.1.</strong> Fundamentals of TLS Encryption</a></li><li class="chapter-item expanded "><a href="network-encryption/index.html"><strong aria-hidden="true">6.2.</strong> Implementing FIPS-Compliant Certificates</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="network-encryption/generate-certs.html"><strong aria-hidden="true">6.2.1.</strong> Generating Certificates with OpenSSL</a></li><li class="chapter-item expanded "><a href="network-encryption/manage-certificates.html"><strong aria-hidden="true">6.2.2.</strong> Managing Certificate Lifecycles</a></li></ol></li><li class="chapter-item expanded "><a href="network-encryption/index.html"><strong aria-hidden="true">6.3.</strong> Configuring Web Servers for FIPS</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="network-encryption/apache.html"><strong aria-hidden="true">6.3.1.</strong> Apache</a></li><li class="chapter-item expanded "><a href="network-encryption/nginx.html"><strong aria-hidden="true">6.3.2.</strong> NGINX</a></li></ol></li><li class="chapter-item expanded "><a href="network-encryption/rest-apis.html"><strong aria-hidden="true">6.4.</strong> Securing REST APIs for FIPS</a></li><li class="chapter-item expanded "><a href="network-encryption/vpn-configurations.html"><strong aria-hidden="true">6.5.</strong> FIPS-Compliant VPNs</a></li></ol></li><li class="chapter-item expanded "><a href="fips-containers/index.html"><strong aria-hidden="true">7.</strong> FIPS Compliant Containers</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="fips-containers/intro.html"><strong aria-hidden="true">7.1.</strong> FIPS in Containerized Environments</a></li><li class="chapter-item expanded "><a href="fips-containers/docker.html"><strong aria-hidden="true">7.2.</strong> Configuring Docker for FIPS Compliance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="fips-containers/building-images.html"><strong aria-hidden="true">7.2.1.</strong> Building FIPS-Compliant Images</a></li><li class="chapter-item expanded "><a href="fips-containers/validating-crypto.html"><strong aria-hidden="true">7.2.2.</strong> Validating Crypto Operations in Containers</a></li></ol></li><li class="chapter-item expanded "><a href="fips-containers/kubernetes.html"><strong aria-hidden="true">7.3.</strong> Implementing FIPS in Kubernetes</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="fips-containers/secrets.html"><strong aria-hidden="true">7.3.1.</strong> Encrypting Kubernetes Secrets</a></li><li class="chapter-item expanded "><a href="fips-containers/network-policies.html"><strong aria-hidden="true">7.3.2.</strong> FIPS-Compliant Network Policies</a></li></ol></li></ol></li><li class="chapter-item expanded "><a href="source-auditing/index.html"><strong aria-hidden="true">8.</strong> Source Auditing for FIPS Compliance</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="source-auditing/identifying-code.html"><strong aria-hidden="true">8.1.</strong> Identifying Non-Compliant Code</a></li><li class="chapter-item expanded "><a href="source-auditing/crypto-calls.html"><strong aria-hidden="true">8.2.</strong> Reviewing Cryptographic Function Calls</a></li><li class="chapter-item expanded "><a href="source-auditing/dependency-analysis.html"><strong aria-hidden="true">8.3.</strong> Dependency Analysis for FIPS Compliance</a></li></ol></li><li class="chapter-item expanded "><a href="troubleshooting/index.html"><strong aria-hidden="true">9.</strong> Troubleshooting and FAQs</a></li><li><ol class="section"><li class="chapter-item expanded "><a href="troubleshooting/configuration-errors.html"><strong aria-hidden="true">9.1.</strong> Resolving Common Configuration Errors</a></li><li class="chapter-item expanded "><a href="troubleshooting/runtime-issues.html"><strong aria-hidden="true">9.2.</strong> Debugging Runtime Issues</a></li><li class="chapter-item expanded "><a href="troubleshooting/faqs.html"><strong aria-hidden="true">9.3.</strong> Frequently Asked Questions</a></li></ol></li><li class="chapter-item expanded "><a href="appendices/index.html"><strong aria-hidden="true">10.</strong> References</a></li></ol>';
+        // Set the current, active page, and reveal it if it's hidden
+        let current_page = document.location.href.toString();
+        if (current_page.endsWith("/")) {
+            current_page += "index.html";
+        }
+        var links = Array.prototype.slice.call(this.querySelectorAll("a"));
+        var l = links.length;
+        for (var i = 0; i < l; ++i) {
+            var link = links[i];
+            var href = link.getAttribute("href");
+            if (href && !href.startsWith("#") && !/^(?:[a-z+]+:)?\/\//.test(href)) {
+                link.href = path_to_root + href;
+            }
+            // The "index" page is supposed to alias the first chapter in the book.
+            if (link.href === current_page || (i === 0 && path_to_root === "" && current_page.endsWith("/index.html"))) {
+                link.classList.add("active");
+                var parent = link.parentElement;
+                if (parent && parent.classList.contains("chapter-item")) {
+                    parent.classList.add("expanded");
+                }
+                while (parent) {
+                    if (parent.tagName === "LI" && parent.previousElementSibling) {
+                        if (parent.previousElementSibling.classList.contains("chapter-item")) {
+                            parent.previousElementSibling.classList.add("expanded");
+                        }
+                    }
+                    parent = parent.parentElement;
+                }
+            }
+        }
+        // Track and set sidebar scroll position
+        this.addEventListener('click', function(e) {
+            if (e.target.tagName === 'A') {
+                sessionStorage.setItem('sidebar-scroll', this.scrollTop);
+            }
+        }, { passive: true });
+        var sidebarScrollTop = sessionStorage.getItem('sidebar-scroll');
+        sessionStorage.removeItem('sidebar-scroll');
+        if (sidebarScrollTop) {
+            // preserve sidebar scroll position when navigating via links within sidebar
+            this.scrollTop = sidebarScrollTop;
+        } else {
+            // scroll sidebar to current active section when navigating via "next/previous chapter" buttons
+            var activeSection = document.querySelector('#sidebar .active');
+            if (activeSection) {
+                activeSection.scrollIntoView({ block: 'center' });
+            }
+        }
+        // Toggle buttons
+        var sidebarAnchorToggles = document.querySelectorAll('#sidebar a.toggle');
+        function toggleSection(ev) {
+            ev.currentTarget.parentElement.classList.toggle('expanded');
+        }
+        Array.from(sidebarAnchorToggles).forEach(function (el) {
+            el.addEventListener('click', toggleSection);
+        });
+    }
+}
+window.customElements.define("mdbook-sidebar-scrollbox", MDBookSidebarScrollbox);

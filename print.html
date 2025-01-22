@@ -1,0 +1,352 @@
+<!DOCTYPE HTML>
+<html lang="en" class="light sidebar-visible" dir="ltr">
+    <head>
+        <!-- Book generated using mdBook -->
+        <meta charset="UTF-8">
+        <title>Whitepaper on FIPS Compliance Assessment</title>
+        <meta name="robots" content="noindex">
+
+
+        <!-- Custom HTML head -->
+
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta name="theme-color" content="#ffffff">
+
+        <link rel="icon" href="favicon.svg">
+        <link rel="shortcut icon" href="favicon.png">
+        <link rel="stylesheet" href="css/variables.css">
+        <link rel="stylesheet" href="css/general.css">
+        <link rel="stylesheet" href="css/chrome.css">
+        <link rel="stylesheet" href="css/print.css" media="print">
+
+        <!-- Fonts -->
+        <link rel="stylesheet" href="FontAwesome/css/font-awesome.css">
+        <link rel="stylesheet" href="fonts/fonts.css">
+
+        <!-- Highlight.js Stylesheets -->
+        <link rel="stylesheet" href="highlight.css">
+        <link rel="stylesheet" href="tomorrow-night.css">
+        <link rel="stylesheet" href="ayu-highlight.css">
+
+        <!-- Custom theme stylesheets -->
+
+
+        <!-- Provide site root to javascript -->
+        <script>
+            var path_to_root = "";
+            var default_theme = window.matchMedia("(prefers-color-scheme: dark)").matches ? "navy" : "light";
+        </script>
+        <!-- Start loading toc.js asap -->
+        <script src="toc.js"></script>
+    </head>
+    <body>
+    <div id="body-container">
+        <!-- Work around some values being stored in localStorage wrapped in quotes -->
+        <script>
+            try {
+                var theme = localStorage.getItem('mdbook-theme');
+                var sidebar = localStorage.getItem('mdbook-sidebar');
+
+                if (theme.startsWith('"') && theme.endsWith('"')) {
+                    localStorage.setItem('mdbook-theme', theme.slice(1, theme.length - 1));
+                }
+
+                if (sidebar.startsWith('"') && sidebar.endsWith('"')) {
+                    localStorage.setItem('mdbook-sidebar', sidebar.slice(1, sidebar.length - 1));
+                }
+            } catch (e) { }
+        </script>
+
+        <!-- Set the theme before any content is loaded, prevents flash -->
+        <script>
+            var theme;
+            try { theme = localStorage.getItem('mdbook-theme'); } catch(e) { }
+            if (theme === null || theme === undefined) { theme = default_theme; }
+            const html = document.documentElement;
+            html.classList.remove('light')
+            html.classList.add(theme);
+            html.classList.add("js");
+        </script>
+
+        <input type="checkbox" id="sidebar-toggle-anchor" class="hidden">
+
+        <!-- Hide / unhide sidebar before it is displayed -->
+        <script>
+            var sidebar = null;
+            var sidebar_toggle = document.getElementById("sidebar-toggle-anchor");
+            if (document.body.clientWidth >= 1080) {
+                try { sidebar = localStorage.getItem('mdbook-sidebar'); } catch(e) { }
+                sidebar = sidebar || 'visible';
+            } else {
+                sidebar = 'hidden';
+            }
+            sidebar_toggle.checked = sidebar === 'visible';
+            html.classList.remove('sidebar-visible');
+            html.classList.add("sidebar-" + sidebar);
+        </script>
+
+        <nav id="sidebar" class="sidebar" aria-label="Table of contents">
+            <!-- populated by js -->
+            <mdbook-sidebar-scrollbox class="sidebar-scrollbox"></mdbook-sidebar-scrollbox>
+            <noscript>
+                <iframe class="sidebar-iframe-outer" src="toc.html"></iframe>
+            </noscript>
+            <div id="sidebar-resize-handle" class="sidebar-resize-handle">
+                <div class="sidebar-resize-indicator"></div>
+            </div>
+        </nav>
+
+        <div id="page-wrapper" class="page-wrapper">
+
+            <div class="page">
+                <div id="menu-bar-hover-placeholder"></div>
+                <div id="menu-bar" class="menu-bar sticky">
+                    <div class="left-buttons">
+                        <label id="sidebar-toggle" class="icon-button" for="sidebar-toggle-anchor" title="Toggle Table of Contents" aria-label="Toggle Table of Contents" aria-controls="sidebar">
+                            <i class="fa fa-bars"></i>
+                        </label>
+                        <button id="theme-toggle" class="icon-button" type="button" title="Change theme" aria-label="Change theme" aria-haspopup="true" aria-expanded="false" aria-controls="theme-list">
+                            <i class="fa fa-paint-brush"></i>
+                        </button>
+                        <ul id="theme-list" class="theme-popup" aria-label="Themes" role="menu">
+                            <li role="none"><button role="menuitem" class="theme" id="light">Light</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="rust">Rust</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="coal">Coal</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="navy">Navy</button></li>
+                            <li role="none"><button role="menuitem" class="theme" id="ayu">Ayu</button></li>
+                        </ul>
+                        <button id="search-toggle" class="icon-button" type="button" title="Search. (Shortkey: s)" aria-label="Toggle Searchbar" aria-expanded="false" aria-keyshortcuts="S" aria-controls="searchbar">
+                            <i class="fa fa-search"></i>
+                        </button>
+                    </div>
+
+                    <h1 class="menu-title">Whitepaper on FIPS Compliance Assessment</h1>
+
+                    <div class="right-buttons">
+                        <a href="print.html" title="Print this book" aria-label="Print this book">
+                            <i id="print-button" class="fa fa-print"></i>
+                        </a>
+
+                    </div>
+                </div>
+
+                <div id="search-wrapper" class="hidden">
+                    <form id="searchbar-outer" class="searchbar-outer">
+                        <input type="search" id="searchbar" name="searchbar" placeholder="Search this book ..." aria-controls="searchresults-outer" aria-describedby="searchresults-header">
+                    </form>
+                    <div id="searchresults-outer" class="searchresults-outer hidden">
+                        <div id="searchresults-header" class="searchresults-header"></div>
+                        <ul id="searchresults">
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Apply ARIA attributes after the sidebar and the sidebar toggle button are added to the DOM -->
+                <script>
+                    document.getElementById('sidebar-toggle').setAttribute('aria-expanded', sidebar === 'visible');
+                    document.getElementById('sidebar').setAttribute('aria-hidden', sidebar !== 'visible');
+                    Array.from(document.querySelectorAll('#sidebar a')).forEach(function(link) {
+                        link.setAttribute('tabIndex', sidebar === 'visible' ? 0 : -1);
+                    });
+                </script>
+
+                <div id="content" class="content">
+                    <main>
+                        <h1 id="introduction-and-motivation"><a class="header" href="#introduction-and-motivation">Introduction and Motivation</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="a-word-on-fips"><a class="header" href="#a-word-on-fips">A Word on FIPS</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fips-140-2-explained"><a class="header" href="#fips-140-2-explained">FIPS 140-2 Explained</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fips-140-3-whats-new"><a class="header" href="#fips-140-3-whats-new">FIPS 140-3: What’s New</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="compliance-vs-validation"><a class="header" href="#compliance-vs-validation">Compliance vs. Validation</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="algorithm-cheatsheet"><a class="header" href="#algorithm-cheatsheet">Algorithm Cheatsheet</a></h1>
+<div class="table-wrapper"><table><thead><tr><th style="text-align: left">Algorithm Category</th><th style="text-align: left">Algorithm Name</th><th style="text-align: left">Variants</th><th style="text-align: center">Minimum Key Length</th><th style="text-align: center">Maximum Key Length</th><th style="text-align: left">Approved Uses</th><th style="text-align: left">FIPS Status</th><th style="text-align: left">FIPS Reference</th><th style="text-align: left">Notes/Restrictions</th></tr></thead><tbody>
+<tr><td style="text-align: left"><strong>Block Cipher</strong></td><td style="text-align: left"><strong>AES</strong> (Advanced Encryption Standard)</td><td style="text-align: left">AES-128, AES-192, AES-256</td><td style="text-align: center">128 bits</td><td style="text-align: center">256 bits</td><td style="text-align: left">Encryption, decryption, key wrapping, CMAC, GCM, XTS</td><td style="text-align: left"><strong>Current</strong></td><td style="text-align: left">FIPS 197, SP 800-38A, SP 800-38B, SP 800-38C, SP 800-38D, SP 800-38F, SP 800-38G</td><td style="text-align: left">Used in various modes of operation, key wrapping, CMAC and other protocols. XTS-AES requires a 256- or 512-bit key, which is parsed into two AES keys</td></tr>
+<tr><td style="text-align: left"><strong>Block Cipher</strong></td><td style="text-align: left"><strong>TDEA</strong> (Triple Data Encryption Algorithm)</td><td style="text-align: left">Two-key TDEA, Three-key TDEA</td><td style="text-align: center">112 bits</td><td style="text-align: center">168 bits</td><td style="text-align: left">Decryption and unwrapping of legacy data, CMAC verification</td><td style="text-align: left"><strong>Legacy</strong> (Two-key) <strong>Deprecated</strong> through 2023, <strong>Disallowed</strong> after 2023 (Three-key)</td><td style="text-align: left">SP 800-67</td><td style="text-align: left">Two-key TDEA is allowed for legacy use only for decryption and unwrapping but is disallowed for encryption. Three-key TDEA is deprecated for encryption through 2023, disallowed after 2023</td></tr>
+<tr><td style="text-align: left"><strong>Block Cipher</strong></td><td style="text-align: left"><strong>SKIPJACK</strong></td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: left">Decryption/Unwrapping</td><td style="text-align: left"><strong>Legacy</strong></td><td style="text-align: left"></td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>Hash Function</strong></td><td style="text-align: left"><strong>SHA-1</strong> (Secure Hash Algorithm 1)</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: left">Non-digital signature applications , verification of digital signatures on legacy data.</td><td style="text-align: left"><strong>Legacy</strong> for digital signature verification; <strong>Disallowed</strong> for digital signature generation</td><td style="text-align: left">FIPS 180-4</td><td style="text-align: left">SHA-1 is disallowed for digital signature generation except where specifically allowed by NIST protocol-specific guidance. Legacy use is allowed for digital signature verification</td></tr>
+<tr><td style="text-align: left"><strong>Hash Function</strong></td><td style="text-align: left"><strong>SHA-2</strong> Family</td><td style="text-align: left">SHA-224, SHA-256, SHA-384, SHA-512, SHA-512/224, SHA-512/256</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: left">All hash function applications</td><td style="text-align: left"><strong>Current</strong></td><td style="text-align: left">FIPS 180-4,</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>Hash Function</strong></td><td style="text-align: left"><strong>SHA-3</strong> Family</td><td style="text-align: left">SHA3-224, SHA3-256, SHA3-384, SHA3-512, SHAKE128, SHAKE256</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: left">All hash function applications</td><td style="text-align: left"><strong>Current</strong></td><td style="text-align: left">FIPS 202</td><td style="text-align: left">Also includes extendable-output functions SHAKE128 and SHAKE256</td></tr>
+<tr><td style="text-align: left"><strong>Message Authentication Code (MAC)</strong></td><td style="text-align: left"><strong>CMAC</strong> (Cipher-based MAC)</td><td style="text-align: left">Two-key TDEA, Three-key TDEA, AES-128, AES-192, AES-256</td><td style="text-align: center">112 bits</td><td style="text-align: center">256 bits</td><td style="text-align: left">MAC verification, message authentication</td><td style="text-align: left"><strong>Legacy</strong> (Two-key and Three-key TDEA), <strong>Current</strong> (AES)</td><td style="text-align: left">SP 800-38B</td><td style="text-align: left">Two-key and three-key TDEA are legacy for CMAC verification only. AES is acceptable for CMAC verification. Requires the use of a block cipher.</td></tr>
+<tr><td style="text-align: left"><strong>Message Authentication Code (MAC)</strong></td><td style="text-align: left"><strong>HMAC</strong> (Keyed-Hash MAC)</td><td style="text-align: left"></td><td style="text-align: center">112 bits</td><td style="text-align: center"></td><td style="text-align: left">Message authentication, HMAC verification</td><td style="text-align: left"><strong>Current</strong> (key lengths ≥ 112 bits), <strong>Legacy</strong> (key lengths &lt; 112 bits)</td><td style="text-align: left">FIPS 198-1</td><td style="text-align: left">Requires a hash function; key lengths less than 112 bits are disallowed for generation, but allowed for legacy verification</td></tr>
+<tr><td style="text-align: left"><strong>Message Authentication Code (MAC)</strong></td><td style="text-align: left"><strong>GMAC</strong> (Galois/Counter Mode MAC)</td><td style="text-align: left">AES-128, AES-192, AES-256</td><td style="text-align: center">128 bits</td><td style="text-align: center">256 bits</td><td style="text-align: left">MAC generation and verification</td><td style="text-align: left"><strong>Current</strong></td><td style="text-align: left">SP 800-38D</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>Message Authentication Code (MAC)</strong></td><td style="text-align: left"><strong>KMAC</strong> (Keyed Message Authentication Code)</td><td style="text-align: left"></td><td style="text-align: center">112 bits</td><td style="text-align: center"></td><td style="text-align: left">MAC generation and verification</td><td style="text-align: left"><strong>Current</strong></td><td style="text-align: left"></td><td style="text-align: left">Key lengths less than 112 bits are disallowed for generation</td></tr>
+<tr><td style="text-align: left"><strong>Key Derivation Function (KDF)</strong></td><td style="text-align: left"><strong>PBKDF</strong> (Password-Based KDF)</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: left">Key derivation</td><td style="text-align: left"><strong>Current</strong></td><td style="text-align: left"></td><td style="text-align: left">PBKDF is an approved KDF</td></tr>
+<tr><td style="text-align: left"><strong>Key Derivation Function (KDF)</strong></td><td style="text-align: left"><strong>KDF</strong> (from SP 800-135rev1)</td><td style="text-align: left">IKEv1, IKEv2, TLS 1.0, 1.1, 1.2, SSHv2, SRTP, SNMPv3, TPMv1.2, ANSI X9.63-2001, ANSI X9.42-2001</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: left">Key derivation for protocols</td><td style="text-align: left"><strong>Current</strong></td><td style="text-align: left">SP 800-135rev1</td><td style="text-align: left">The KDFs from these protocols are considered algorithms. Validation testing is available</td></tr>
+<tr><td style="text-align: left"><strong>Key Derivation Function (KDF)</strong></td><td style="text-align: left"><strong>KDF</strong> (from SP 800-56C)</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: left">Key derivation for key agreement schemes</td><td style="text-align: left"><strong>Current</strong></td><td style="text-align: left">SP 800-56C</td><td style="text-align: left">Used for key agreement schemes. A one-step KDF without a counter is also approved.</td></tr>
+<tr><td style="text-align: left"><strong>Key Agreement Scheme</strong></td><td style="text-align: left"><strong>Diffie-Hellman (DH)</strong> and <strong>Menezes-Qu-Vanstone (MQV)</strong></td><td style="text-align: left">FFC DH and ECC CDH</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: left">Key agreement</td><td style="text-align: left"><strong>Current</strong> (if using safe-prime groups or FIPS 186-type domain parameters with minimum security strength of 112 bits)</td><td style="text-align: left">FIPS 186, SP 800-56A</td><td style="text-align: left">Security strength less than 112 bits is disallowed.</td></tr>
+<tr><td style="text-align: left"><strong>Key Transport Scheme</strong></td><td style="text-align: left"><strong>RSA</strong> (Rivest-Shamir-Adleman)</td><td style="text-align: left"></td><td style="text-align: center">2048 bits</td><td style="text-align: center"></td><td style="text-align: left">Key transport</td><td style="text-align: left"><strong>Current</strong></td><td style="text-align: left">SP 800-56B</td><td style="text-align: left">RSA key transport must comply with SP 800-56B, with the exception of PKCS#1-v1.5 padding, which is deprecated through 2023 and disallowed after 2023. 1024-bit RSA modulus may be used for legacy verification, but not generation.</td></tr>
+<tr><td style="text-align: left"><strong>Key Transport Scheme</strong></td><td style="text-align: left"><strong>KTS</strong> (Key Transport Scheme)</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: left">Key transport, key wrapping</td><td style="text-align: left"><strong>Current</strong></td><td style="text-align: left"></td><td style="text-align: left">Symmetric key based key transport (e.g. AES key wrap), or assymetric key based key transport schemes such as KTS-IFC may be used.</td></tr>
+<tr><td style="text-align: left"><strong>Digital Signature Algorithm</strong></td><td style="text-align: left"><strong>RSA</strong> (Rivest-Shamir-Adleman)</td><td style="text-align: left">RSASSA-PKCS1-v1.5, RSASSA-PSS</td><td style="text-align: center">2048 bits</td><td style="text-align: center"></td><td style="text-align: left">Digital signature generation and verification</td><td style="text-align: left"><strong>Current</strong> (2048 and 3072 bits), <strong>Legacy</strong> (1024 bit modulus for verification)</td><td style="text-align: left">FIPS 186-4, FIPS 186-5</td><td style="text-align: left">1024-bit RSA modulus is allowed for legacy verification purposes only.</td></tr>
+<tr><td style="text-align: left"><strong>Digital Signature Algorithm</strong></td><td style="text-align: left"><strong>DSA</strong> (Digital Signature Algorithm)</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: left">Digital signature generation and verification</td><td style="text-align: left"><strong>Legacy</strong></td><td style="text-align: left">FIPS 186-2, FIPS 186-4</td><td style="text-align: left">DSA signature verification is allowed for legacy use.</td></tr>
+<tr><td style="text-align: left"><strong>Digital Signature Algorithm</strong></td><td style="text-align: left"><strong>ECDSA</strong> (Elliptic Curve Digital Signature Algorithm)</td><td style="text-align: left">Deterministic ECDSA signature generation</td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: left">Digital signature generation and verification</td><td style="text-align: left"><strong>Current</strong></td><td style="text-align: left">FIPS 186-4, FIPS 186-5, SP 800-186</td><td style="text-align: left">Uses approved elliptic curves.</td></tr>
+<tr><td style="text-align: left"><strong>Digital Signature Algorithm</strong></td><td style="text-align: left"><strong>EdDSA</strong> (Edwards-curve Digital Signature Algorithm)</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: left">Digital signature generation and verification</td><td style="text-align: left"><strong>Current</strong></td><td style="text-align: left">FIPS 186-5</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>Digital Signature Algorithm</strong></td><td style="text-align: left"><strong>Hash-based Signature Schemes</strong> (LMS, XMSS, HSS)</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: left">Digital signature generation and verification</td><td style="text-align: left"><strong>Current</strong></td><td style="text-align: left">SP 800-208</td><td style="text-align: left">Stateful hash-based signature schemes. Key generation and signature generation must be implemented for a given parameter set. Implementations must be within a hardware module and be FIPS 140-2 or FIPS 140-3 Level 3 or higher.</td></tr>
+<tr><td style="text-align: left"><strong>Post-Quantum Algorithm</strong></td><td style="text-align: left"><strong>ML-KEM</strong> (Module-Lattice-based Key-Encapsulation Mechanism)</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: left">Key encapsulation</td><td style="text-align: left"><strong>Current</strong></td><td style="text-align: left">FIPS 203</td><td style="text-align: left">ML-KEM encapsulation algorithm must be tested for KAT.</td></tr>
+<tr><td style="text-align: left"><strong>Post-Quantum Algorithm</strong></td><td style="text-align: left"><strong>ML-DSA</strong> (Module-Lattice-based Digital Signature Algorithm)</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: left">Digital signature generation and verification</td><td style="text-align: left"><strong>Current</strong></td><td style="text-align: left">FIPS 204</td><td style="text-align: left"></td></tr>
+<tr><td style="text-align: left"><strong>Post-Quantum Algorithm</strong></td><td style="text-align: left"><strong>SLH-DSA</strong> (StateLess Hash-based Digital Signature Algorithm)</td><td style="text-align: left"></td><td style="text-align: center"></td><td style="text-align: center"></td><td style="text-align: left">Digital signature generation and verification</td><td style="text-align: left"><strong>Current</strong></td><td style="text-align: left">FIPS 205</td><td style="text-align: left"></td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="fips-compliance-in-java"><a class="header" href="#fips-compliance-in-java">FIPS Compliance in Java</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="introduction-to-java-cryptography"><a class="header" href="#introduction-to-java-cryptography">Introduction to Java Cryptography</a></h1>
+<h2 id="java-cryptography-architecture-jca"><a class="header" href="#java-cryptography-architecture-jca">Java Cryptography Architecture (JCA)</a></h2>
+<h2 id="java-cryptography-engine-jce"><a class="header" href="#java-cryptography-engine-jce">Java Cryptography Engine (JCE)</a></h2>
+<h2 id="adding-bouncy-castle-provider"><a class="header" href="#adding-bouncy-castle-provider">Adding Bouncy Castle Provider</a></h2>
+<p>What not to do:</p>
+<pre><code class="language-java">Security.addProvider()
+</code></pre>
+<p>What to do:</p>
+<pre><code class="language-java">Security.InsertAt();
+</code></pre>
+<p>Or,
+Manually modify <code>java.security</code> file to add providers. Example:</p>
+<pre><code class="language-java">security.provider.1=org.bouncycastle.jcajce.provider.BouncyCastleFipsProvider C:HYBRID;ENABLE{All};
+security.provider.2=org.bouncycastle.jsse.provider.BouncyCastleJsseProvider fips:BCFIPS
+security.provider.3=SUN
+security.provider.4=SunJGSS
+securerandom.source=file:/dev/urandom
+securerandom.strongAlgorithms=NativePRNGBlocking:SUN,DRBG:SUN
+securerandom.drbg.config=
+login.configuration.provider=sun.security.provider.ConfigFile
+policy.provider=sun.security.provider.PolicyFile
+policy.expandProperties=true
+policy.allowSystemProperty=true
+policy.ignoreIdentityScope=false
+keystore.type=BCFKS
+keystore.type.compat=true
+</code></pre>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fips-validated-crypto-providers-for-java"><a class="header" href="#fips-validated-crypto-providers-for-java">FIPS-Validated Crypto Providers for Java</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="configuring-jvm-for-fips-mode"><a class="header" href="#configuring-jvm-for-fips-mode">Configuring JVM for FIPS Mode</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="enabling-fips-at-compile-time"><a class="header" href="#enabling-fips-at-compile-time">Enabling FIPS at Compile Time</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="runtime-configuration-for-fips"><a class="header" href="#runtime-configuration-for-fips">Runtime Configuration for FIPS</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="keystore-and-truststore-management"><a class="header" href="#keystore-and-truststore-management">Keystore and Truststore Management</a></h1>
+<p>Before delving into Keystore and Truststore management, let's take a quick refresher on what each term mean and why are they relevant.</p>
+<h2 id="keystore"><a class="header" href="#keystore">Keystore</a></h2>
+<h2 id="truststore"><a class="header" href="#truststore">Truststore</a></h2>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="creating-fips-compliant-keystores"><a class="header" href="#creating-fips-compliant-keystores">Creating FIPS-Compliant Keystores</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="managing-certificates-for-fips-compliance"><a class="header" href="#managing-certificates-for-fips-compliance">Managing Certificates for FIPS Compliance</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="java-frameworks-and-libraries-for-fips"><a class="header" href="#java-frameworks-and-libraries-for-fips">Java Frameworks and Libraries for FIPS</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="spring-boot-and-fips-compliance"><a class="header" href="#spring-boot-and-fips-compliance">Spring Boot and FIPS Compliance</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="hibernate-with-fips-validated-encryption"><a class="header" href="#hibernate-with-fips-validated-encryption">Hibernate with FIPS-Validated Encryption</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="debugging-fips-issues-in-java"><a class="header" href="#debugging-fips-issues-in-java">Debugging FIPS Issues in Java</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="algorithm-cheatsheet-1"><a class="header" href="#algorithm-cheatsheet-1">Algorithm Cheatsheet</a></h1>
+<div class="table-wrapper"><table><thead><tr><th>Algorithm Name</th><th>Category</th><th>JCA Standard Name</th><th>Reason for FIPS Non-compliance</th></tr></thead><tbody>
+<tr><td><strong>Blowfish</strong></td><td>Cipher</td><td>Blowfish</td><td>Not a FIPS approved algorithm.</td></tr>
+<tr><td><strong>DES</strong></td><td>Cipher</td><td>DES</td><td><strong>Not approved</strong> for general use by FIPS. It is not mentioned as legacy, or acceptable for specific uses like unwrapping.</td></tr>
+<tr><td><strong>MD2</strong></td><td>Message Digest</td><td>MD2</td><td><strong>Not a FIPS approved</strong> hash algorithm. Considered insecure.</td></tr>
+<tr><td><strong>MD5</strong></td><td>Message Digest</td><td>MD5</td><td><strong>Not a FIPS approved</strong> hash algorithm. Considered insecure.</td></tr>
+<tr><td><strong>RSA (without PSS parameters)</strong></td><td>Signature</td><td>RSA</td><td><strong>Not compliant</strong> for signature generation with PKCS#1 v1.5, which is deprecated. FIPS requires RSA signatures to comply with RSASSA-PSS or RSASSA-PKCS1-v1.5 (for legacy verification).</td></tr>
+</tbody></table>
+</div><div style="break-before: page; page-break-before: always;"></div><h1 id="fips-compliance-in-scala"><a class="header" href="#fips-compliance-in-scala">FIPS Compliance in Scala</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="cryptography-in-scala"><a class="header" href="#cryptography-in-scala">Cryptography in Scala</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fips-compliant-libraries-in-scala"><a class="header" href="#fips-compliant-libraries-in-scala">FIPS-Compliant Libraries in Scala</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="integrating-bouncy-castle-in-scala"><a class="header" href="#integrating-bouncy-castle-in-scala">Integrating Bouncy Castle in Scala</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="using-openssl-with-scala"><a class="header" href="#using-openssl-with-scala">Using OpenSSL with Scala</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="securing-akka-applications"><a class="header" href="#securing-akka-applications">Securing Akka Applications</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fips-compliant-configurations-for-play-framework"><a class="header" href="#fips-compliant-configurations-for-play-framework">FIPS-Compliant Configurations for Play Framework</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="best-practices-for-scala-fips-development"><a class="header" href="#best-practices-for-scala-fips-development">Best Practices for Scala FIPS Development</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fips-compliance-in-aws-ec2"><a class="header" href="#fips-compliance-in-aws-ec2">FIPS Compliance in AWS EC2</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="overview-of-aws-fips-offerings"><a class="header" href="#overview-of-aws-fips-offerings">Overview of AWS FIPS Offerings</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="launching-fips-compliant-ec2-instances"><a class="header" href="#launching-fips-compliant-ec2-instances">Launching FIPS-Compliant EC2 Instances</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fips-compliance-in-aws-ec2-1"><a class="header" href="#fips-compliance-in-aws-ec2-1">FIPS Compliance in AWS EC2</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="configuring-ebs-volumes"><a class="header" href="#configuring-ebs-volumes">Configuring EBS Volumes</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="managing-s3-buckets-for-fips"><a class="header" href="#managing-s3-buckets-for-fips">Managing S3 Buckets for FIPS</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fips-compliance-in-aws-ec2-2"><a class="header" href="#fips-compliance-in-aws-ec2-2">FIPS Compliance in AWS EC2</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="setting-up-vpc-encryption"><a class="header" href="#setting-up-vpc-encryption">Setting Up VPC Encryption</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="configuring-elastic-load-balancers-for-fips"><a class="header" href="#configuring-elastic-load-balancers-for-fips">Configuring Elastic Load Balancers for FIPS</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="monitoring-and-auditing-ec2-for-fips-compliance"><a class="header" href="#monitoring-and-auditing-ec2-for-fips-compliance">Monitoring and Auditing EC2 for FIPS Compliance</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="network-encryption-for-fips-compliance"><a class="header" href="#network-encryption-for-fips-compliance">Network Encryption for FIPS Compliance</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fundamentals-of-tls-encryption"><a class="header" href="#fundamentals-of-tls-encryption">Fundamentals of TLS Encryption</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="network-encryption-for-fips-compliance-1"><a class="header" href="#network-encryption-for-fips-compliance-1">Network Encryption for FIPS Compliance</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="generating-certificates-with-openssl"><a class="header" href="#generating-certificates-with-openssl">Generating Certificates with OpenSSL</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="managing-certificate-lifecycles"><a class="header" href="#managing-certificate-lifecycles">Managing Certificate Lifecycles</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="network-encryption-for-fips-compliance-2"><a class="header" href="#network-encryption-for-fips-compliance-2">Network Encryption for FIPS Compliance</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="apache"><a class="header" href="#apache">Apache</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="nginx"><a class="header" href="#nginx">NGINX</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="securing-rest-apis-for-fips"><a class="header" href="#securing-rest-apis-for-fips">Securing REST APIs for FIPS</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fips-compliant-vpns"><a class="header" href="#fips-compliant-vpns">FIPS-Compliant VPNs</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fips-compliant-containers"><a class="header" href="#fips-compliant-containers">FIPS Compliant Containers</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fips-in-containerized-environments"><a class="header" href="#fips-in-containerized-environments">FIPS in Containerized Environments</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="configuring-docker-for-fips-compliance"><a class="header" href="#configuring-docker-for-fips-compliance">Configuring Docker for FIPS Compliance</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="building-fips-compliant-images"><a class="header" href="#building-fips-compliant-images">Building FIPS-Compliant Images</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="validating-crypto-operations-in-containers"><a class="header" href="#validating-crypto-operations-in-containers">Validating Crypto Operations in Containers</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="implementing-fips-in-kubernetes"><a class="header" href="#implementing-fips-in-kubernetes">Implementing FIPS in Kubernetes</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="encrypting-kubernetes-secrets"><a class="header" href="#encrypting-kubernetes-secrets">Encrypting Kubernetes Secrets</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="fips-compliant-network-policies"><a class="header" href="#fips-compliant-network-policies">FIPS-Compliant Network Policies</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="source-auditing-for-fips-compliance"><a class="header" href="#source-auditing-for-fips-compliance">Source Auditing for FIPS Compliance</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="identifying-non-compliant-code"><a class="header" href="#identifying-non-compliant-code">Identifying Non-Compliant Code</a></h1>
+<p>Things to look for.</p>
+<h3 id="soundly-configured-parameters"><a class="header" href="#soundly-configured-parameters">Soundly Configured Parameters</a></h3>
+<ul>
+<li>Algorithm</li>
+<li>Mode of Operation</li>
+<li>Padding Scheme</li>
+<li>Keys</li>
+<li>Initialization Vector</li>
+</ul>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="reviewing-cryptographic-function-calls"><a class="header" href="#reviewing-cryptographic-function-calls">Reviewing Cryptographic Function Calls</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="dependency-analysis-for-fips-compliance"><a class="header" href="#dependency-analysis-for-fips-compliance">Dependency Analysis for FIPS Compliance</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="troubleshooting-and-faqs"><a class="header" href="#troubleshooting-and-faqs">Troubleshooting and FAQs</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="resolving-common-configuration-errors"><a class="header" href="#resolving-common-configuration-errors">Resolving Common Configuration Errors</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="debugging-runtime-issues"><a class="header" href="#debugging-runtime-issues">Debugging Runtime Issues</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="frequently-asked-questions"><a class="header" href="#frequently-asked-questions">Frequently Asked Questions</a></h1>
+<div style="break-before: page; page-break-before: always;"></div><h1 id="references-and-further-reading"><a class="header" href="#references-and-further-reading">References and Further Reading</a></h1>
+
+                    </main>
+
+                    <nav class="nav-wrapper" aria-label="Page navigation">
+                        <!-- Mobile navigation buttons -->
+
+
+                        <div style="clear: both"></div>
+                    </nav>
+                </div>
+            </div>
+
+            <nav class="nav-wide-wrapper" aria-label="Page navigation">
+
+            </nav>
+
+        </div>
+
+        <!-- Livereload script (if served using the cli tool) -->
+        <script>
+            const wsProtocol = location.protocol === 'https:' ? 'wss:' : 'ws:';
+            const wsAddress = wsProtocol + "//" + location.host + "/" + "__livereload";
+            const socket = new WebSocket(wsAddress);
+            socket.onmessage = function (event) {
+                if (event.data === "reload") {
+                    socket.close();
+                    location.reload();
+                }
+            };
+
+            window.onbeforeunload = function() {
+                socket.close();
+            }
+        </script>
+
+
+
+        <script>
+            window.playground_copyable = true;
+        </script>
+
+
+        <script src="elasticlunr.min.js"></script>
+        <script src="mark.min.js"></script>
+        <script src="searcher.js"></script>
+
+        <script src="clipboard.min.js"></script>
+        <script src="highlight.js"></script>
+        <script src="book.js"></script>
+
+        <!-- Custom JS scripts -->
+
+        <script>
+        window.addEventListener('load', function() {
+            window.setTimeout(window.print, 100);
+        });
+        </script>
+
+    </div>
+    </body>
+</html>
