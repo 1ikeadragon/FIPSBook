@@ -3,8 +3,8 @@
 - [Introduction and Motivation](introduction.md)
 
 - [A Word on FIPS](fips-overview/README.md)
-    - [FIPS 140-2 Explained](fips-overview/fips-140-2.md)
     - [FIPS 140-3: What’s New](fips-overview/fips-140-3.md)
+    - [What FIPS Isn't](fips-overview/fips-140-3.md)
     - [Compliance vs. Validation](fips-overview/compliance-vs-validation.md)
     - [Algorithm Cheatsheet](fips-overview/algorithm-cheatsheet.md)
 
