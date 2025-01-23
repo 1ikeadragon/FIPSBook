@@ -2,6 +2,8 @@
 
 - [FIPS Compliance Assessment](index.md)
 
+- [License](license.md)
+
 - [A Word on FIPS](fips-overview/README.md)
     - [FIPS 140-3: What’s New](fips-overview/fips-140-3.md)
     - [What FIPS Isn't](fips-overview/what-fips-isnt.md)
@@ -9,7 +11,6 @@
     - [Algorithm Cheatsheet](fips-overview/algorithm-cheatsheet.md)
 
 - [FIPS Compliance in Java](fips-java/README.md)
-    - [Introduction to Java Cryptography](fips-java/intro-to-jca.md)
     - [FIPS-Validated Crypto Providers for Java](fips-java/crypto-providers.md)
     - [Configuring JVM for FIPS Mode](fips-java/fips-jvm-config.md)
         - [Enabling FIPS at Compile Time](fips-java/compile-time.md)
@@ -67,6 +68,8 @@
     - [Identifying Non-Compliant Code](source-auditing/identifying-code.md)
     - [Reviewing Cryptographic Function Calls](source-auditing/crypto-calls.md)
     - [Dependency Analysis for FIPS Compliance](source-auditing/dependency-analysis.md)
+    - [FIPS Auditing Cheatsheet](source-auditing/fips-auditing-cheat-sheet.md)
+    - [FIPS Auditing Anti-patterns](source-auditing/fips-auditing-anti-patterns.md)
 
 - [Troubleshooting and FAQs](troubleshooting/README.md)
     - [Resolving Common Configuration Errors](troubleshooting/configuration-errors.md)
