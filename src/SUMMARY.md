@@ -1,6 +1,6 @@
 # Summary
 
-- [Introduction and Motivation](introduction.md)
+- [FIPS Compliance Assessment](index.md)
 
 - [A Word on FIPS](fips-overview/README.md)
     - [FIPS 140-3: What’s New](fips-overview/fips-140-3.md)
